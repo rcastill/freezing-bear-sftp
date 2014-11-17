@@ -1,3 +1,3 @@
 __author__ = 'Rodolfo'
 
-import paramiko
+from handler import SFTPHandler
