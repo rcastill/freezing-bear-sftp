@@ -1,29 +1,23 @@
 from Tkinter import *
-import json
 from strings import *
-
+from util import DataManager
 
 class Frame(Tk):
-	data = { 'ip': '', 'user': '', 'remote': '', 'password': '' }
-
-	def __init__(self):
+	def __init__(self, callback):
 		Tk.__init__(self)
-		self.title(CAPTION)
+		self.callback = callback
 
-		with open('.meta', 'r') as meta:
-			if meta.read() != "":
-				meta.seek(0)
-				Frame.data = json.load(meta)
+		self.title(CAPTION)
 
 		self.ip_label = Label(self, text = IP)
 		self.user_label = Label(self, text = USER_NAME)
 		self.password_label = Label(self, text = PASSWORD)
 		self.remote_label = Label(self, text = REMOTE_PATH)
 
-		ip_variable = StringVar(self, Frame.data['ip'])
-		user_variable = StringVar(self, Frame.data['user'])
-		password_variable = StringVar(self, Frame.data['password'])
-		remote_variable = StringVar(self, Frame.data['remote'])
+		ip_variable = StringVar(self, DataManager.data['ip'])
+		user_variable = StringVar(self, DataManager.data['user'])
+		password_variable = StringVar(self, DataManager.data['password'])
+		remote_variable = StringVar(self, DataManager.data['remote'])
 
 		self.ip_entry = Entry(self, textvariable = ip_variable)
 		self.user_entry = Entry(self, textvariable = user_variable)
@@ -47,14 +41,12 @@ class Frame(Tk):
 		self.confirm_button.grid(row = 4, columnspan = 2, column = 0, pady = 4)
 
 	def save(self):
-		Frame.data = {
+		data = {
 			'ip': self.ip_entry.get(),
 			'user': self.user_entry.get(),
 			'password': self.password_entry.get(),
 			'remote': self.remote_entry.get()
 		}
 
-		with open('.meta', 'w') as meta:
-			json.dump(Frame.data, meta)
-
+		self.callback(data)
 		self.destroy()
