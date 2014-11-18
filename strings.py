@@ -1,0 +1,6 @@
+REMOTE_PATH	= 'Remote path'
+USER_NAME 	= 'User name'
+PASSWORD 	= 'Password'
+CAPTION 	= 'File Loader'
+CONFIRM		= 'Accept'
+IP 			= 'IP'
