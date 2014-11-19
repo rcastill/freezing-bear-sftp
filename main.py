@@ -1,7 +1,6 @@
-from Tkinter import Tk
 from frame import *
 import sys
-# from sftp import *
+from sftp import *
 from util import *
 
 class App():
@@ -12,10 +11,10 @@ class App():
 			# abrir interfaz de configuracion.
 			self.master = Frame(DataManager.save)
 			self.master.mainloop()
-#		else:
+		else:
 			# establecer protocolo de envio de datos.
-#			sftp = SFTPHandler(DataManager.data['ip'], DataManager.data['user'], DataManager.data['password'])
-#			sftp.send(*sys.argv)
+			sftp = SFTPHandler(DataManager.data['ip'], DataManager.data['user'], DataManager.data['password'])
+			sftp.send(DataManager.data['remote'], *sys.argv[1:])
 
 if __name__ == "__main__":
 	app = App()

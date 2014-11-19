@@ -26,7 +26,7 @@ if __name__ == '__main__':
     from sys import argv
 
     handler = SFTPHandler("ssh2.inf.utfsm.cl", "pene", "mipene")
-    handler.send("/home/rcastill/", *argv[1:])
+    handler.send("/home/mijara/", *argv[1:])
     print "Files sent"
     handler.close()
     print "Handler closed."
